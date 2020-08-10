@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block title %}Lista | Djenda | Agenda de Contactos | MPCP - Geramos Valor{% endblock %}
+
+{% block navbar %}
+
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+    <a class="navbar-brand" href="{% url 'index' %}">
+        <img src="https://img.icons8.com/plasticine/100/000000/phone-not-being-used.png" width="36" height="36"
+
+             class="d-inline-block align-top" alt="">
+        Djenda v0.1
+    </a>
+</nav>
+{% endblock %}
+
+{% block body %}
+<style>
+body {
+  background-image: url('/static/background/09.jpg');
+}
+
+</style>
+<div class="container" style="margin-top:60px">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Lista de Contactos</h5>
+                    <p class="card-text"></p>
+                    <table class="table table-borderless">
+                        <thead>
+                        </thead>
+                        <tbody>
+                        {% for object in object_list %}
+                        <tr>
+                            <th scope="row"><h6>{{object.nome}}</h6></th>
+                            <th scope="row"><h6>{{object.funcao}}</h6></th>
+                            <th scope="row"><h6>{{object.empresa}}</h6></th>
+                            <th scope="row"><h6>{{object.departamento}}</h6></th>
+                            <th scope="row"><h6>{{object.telefone}}</h6></th>
+                            <th scope="row"><h6>{{object.telemovel}}</h6></th>
+                            <th scope="row"><h6>{{object.email}}</h6></th>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    <h3>
+                        <ul class="pagination">
+
+                            <p>Página:</p>
+
+                            {% for pg in paginator.page_range %}
+                            {% if paginator.number == pg %}
+                            <li class="active"><a href="?page={{ pg }}">{{ pg }}</a></li>
+                            {% else %}
+                            <li><a href="?page={{ pg }}">{{ pg }}</a></li>
+                            {% endif %}
+                            {% endfor %}
+                            </li>
+                        </ul>
+                    </h3>
+
+                    <a button type="button" disabled class="btn btn-secondary" href="{% url 'index' %}">
+                        Voltar</abutton></a>
+                    <a button type="button" disabled class="btn btn-primary" href="{% url 'ver_todos' %}">
+                        Exportar</abutton></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
